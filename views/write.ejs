@@ -1,6 +1,16 @@
 <%- include("partials/header.ejs") %>
 
-<H1>What is on your mind?</H1>
+<h1>What is on your mind?</h1>
+
+<div class="entry container">
+    <form style="text-align:center">
+        <input name="name" type="text" class="feedback-input" placeholder="Name" />
+        <input name="email" type="text" class="feedback-input" placeholder="Email" />
+        <textarea name="text" class="feedback-input" placeholder="Comment"></textarea>
+        <input type="submit" value="SUBMIT" />
+    </form>
+</div>
+      
 
 
 <%- include("partials/footer.ejs") %>
