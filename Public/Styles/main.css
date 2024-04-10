@@ -1,0 +1,102 @@
+header{
+    background-color: white !important;
+    
+}
+
+.navbar-nav .nav-link{
+    color: gray !important;
+    font-size:x-large;
+}
+
+.display-4 {
+  color: gray !important;
+}
+
+
+  
+  /* Change text color on hover */
+  .navbar-nav .nav-link:hover {
+    background-color: white; /* Change to a lighter color on hover */
+    color: black !important;
+    border-radius: 5px;
+  }
+  
+
+/* Change text color on hover */
+.btn-primary:hover {
+    background-color: lightgray !important; /* Change to a lighter color on hover */
+
+
+}
+
+
+.btn-primary{
+    background-color: white !important;
+    color: gray !important;
+    border: none;
+    font-size:x-large;
+}
+
+
+footer {
+  position: relative;
+  width: 100%;
+  background: #D3D3D3;
+  min-height: 100px;
+  padding: 20px ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+
+footer .social_icon,
+footer .menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  padding: 0;
+}
+
+footer .copyright{
+  color: black;
+}
+
+footer .social_icon li,
+footer .menu li {
+  list-style: none;
+  padding: 0;
+  margin: 0 5px; /* Add margin to each list item for spacing */
+}
+footer .social_icon li a {
+  font-size: 3em;
+  padding: 0;
+  color: black;
+  margin: 0 10px;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+footer .social_icon li a:hover {
+  transform: translateY(-15px);
+  color: white;
+}
+
+p {
+  color: black;
+  text-align: center;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.copyright {
+  color: black;
+  justify-content: center;
+  align-items: center;
+}
