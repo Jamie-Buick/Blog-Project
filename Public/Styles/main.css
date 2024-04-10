@@ -72,6 +72,7 @@ footer {
   justify-content: center;
   align-items: center;
   color: black;
+  margin-top: auto;
 }
 
 footer .social_icon,
@@ -139,7 +140,7 @@ form {
 }
 
 .feedback-input {
-  color: white;
+  color: black;
   font-weight: 500;
   font-size: 18px;
   border-radius: 5px;
