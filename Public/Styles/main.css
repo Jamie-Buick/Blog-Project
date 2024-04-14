@@ -189,3 +189,21 @@ textarea {
 .entry{
   padding-bottom: 3rem;
 }
+
+
+.cards h1{
+  color: black  !important;
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.cards h5{
+  color: gray  !important;
+  font-size:medium;
+}
+
+.cards p{
+  padding-top: 2rem;
+  color: gray  !important;
+  text-align: left;
+}

@@ -1,40 +1,44 @@
 <%- include("partials/header.ejs") %>
 
 
-<div class ="container"> 
-    <div class="row mb-2">
-        <div class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary-emphasis"><%=locals.title%></strong>
-            <h3 class="mb-0"><%=locals.name%></h3>
-            <div class="mb-1 text-body-secondary"><%=locals.today%></div>
-            <p class="card-text mb-auto"><%=locals.content%></p>
-            <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                Continue reading
-                <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
-            </a>
+<div class="container"> 
+    <% for (let i = 0; i < posts.length; i += 2) { %>
+        <div class="cards row mb-2">
+            <div class="col-md-6">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h1 class="mb-2 "><%= posts[i].title %></h1>
+                        <h5 class="mb-0"><%= "Author: " + posts[i].name %></h5>
+                        <div class="mb-1"><%= posts[i].today %></div>
+                        <% const contentWords = posts[i].content.split(' ').slice(0, 100).join(' '); %>
+                        <p class="card-text mb-auto"><%= contentWords %></p>
+                        <a href="/blog/<%= posts[i].id %>" class="icon-link gap-1 icon-link-hover stretched-link">
+                            <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                        </a>
+                    </div>
+                </div>
             </div>
+            <% if (i + 1 < posts.length) { %>
+                <div class="col-md-6">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <h1 class=" mb-2"><%= posts[i + 1].title %></h1>
+                            <h5 class="mb-0"><%="Author: " + posts[i + 1].name %></h5>
+                            <div class="mb-1"><%= posts[i + 1].today %></div>
+                            <% const contentWords2 = posts[i + 1].content.split(' ').slice(0, 100).join(' '); %>
+                            <p class="card-text mb-auto"><%= contentWords2 %></p>
+                            <a href="/blog/<%= posts[i + 1].id %>" class="icon-link gap-1 icon-link-hover stretched-link">
+                                <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
         </div>
-        </div>
-
-<!--   <div class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-success-emphasis">Title</strong>
-            <h3 class="mb-0">Post title</h3>
-            <div class="mb-1 text-body-secondary">Date</div>
-            <p class="mb-auto">content.</p>
-            <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                Continue reading
-                <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
-            </a>
-            </div>
-    
-        </div>
-        </div> -->
-    </div>
+    <% } %>
 </div>
+
+
 
 
 
