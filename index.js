@@ -5,13 +5,13 @@ const port = 3000;
 app.use(express.static("public"));
 
 app.get("/", (req, res)=> {
-  res.render("blogs.ejs")
+  res.render("index.ejs")
   });
   
 
-  app.get("/blogs", (req, res)=> {
+/*   app.get("/blogs", (req, res)=> {
     res.render("blogs.ejs")
-  });
+  }); */
 
   app.get("/write", (req, res)=> {
     res.render("write.ejs")
