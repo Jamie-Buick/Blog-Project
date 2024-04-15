@@ -232,3 +232,37 @@ textarea {
   color: gray !important;
   margin-bottom: 2rem;
 }
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  
+}
+.btn-edit {
+  background-color: #D3D3D3; /* Blue color */
+  border-color: #D3D3D3; /* Blue color */
+  color: #fff; /* White color for text */
+}
+
+.btn-danger {
+  background-color: red; /* Blue color */
+  border-color: red; /* Blue color */
+  color: #fff; /* White color for text */
+}
+
+.btn-danger:hover {
+  background-color: darkred; /* Darker blue on hover */
+  border-color: darkred; /* Darker blue on hover */
+  color: #fff; /* White color for text */
+}
+
+.btn-edit:hover {
+  background-color: gray; /* Darker blue on hover */
+  border-color: gray; /* Darker blue on hover */
+  color: #fff; /* White color for text */
+}
+
+.btn-edit:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); /* Light blue shadow when focused */
+}

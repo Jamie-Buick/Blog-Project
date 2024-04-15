@@ -1,11 +1,11 @@
 <%- include("partials/header.ejs") %>
 
 
-<div class="container"> 
+<div class="align-items-center text-align-centre"> 
     <% for (let i = 0; i < posts.length; i += 2) { %>
-        <div class="cards row mb-2">
-            <div class="col-md-6">
-                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="cards row mb-2 mx-5">
+            <div class="card1 col-md-6">
+                <div class="row mx-5  border rounded overflow-hidden flex-md-row mb-2 shadow-sm h-md-250 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
                         <h1 class=" "><%= posts[i].title %></h1>
                         
@@ -20,8 +20,8 @@
                 </div>
             </div>
             <% if (i + 1 < posts.length) { %>
-                <div class="col-md-6">
-                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="card2 col-md-6">
+                    <div class="row mx-5 border rounded overflow-hidden flex-md-row mb-2 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
                             <h1 class=" "><%= posts[i + 1].title %></h1>
                         

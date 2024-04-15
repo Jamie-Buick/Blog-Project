@@ -16,7 +16,18 @@
     
 </div>
 
- 
+<div class="container my-4">
+    <div class="btn-container">
+        <form method="post" action="/delete">
+            <button type="submit" class="btn btn-danger rounded-pill">Delete</button>
+        </form>
+        <form method="post" action="/edit">
+            <button type="submit" class="btn btn-edit rounded-pill">Edit</button>
+        </form>
+    </div>
+</div>
+
+  
 
 
 <%- include("partials/footer.ejs") %>
