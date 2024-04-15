@@ -1,22 +1,22 @@
 <%- include("partials/header.ejs") %>
 
 
-<div class ="container">
-    <h1><%= selectedPost.title %></h1>
+<div class="contentPageTitle container ">
 
-
-
-
-
-
-<p my-5 py-5><%= selectedPost.content %></p>
-
-
-
-<h5 my-5 py-5><%="Written by: " + selectedPost.name %> </h5>
+    <h1 ><%= selectedPost.title %></h1>
 
 
 </div>
+   
+<div class="contentPage container ">
+
+    <p class="date"><%=selectedPost.date %> </p>
+    <p class="author"><%=selectedPost.name %> </p>
+    <p mx-5 px-5><%= selectedPost.content %></p>
+    
+</div>
+
+ 
 
 
 <%- include("partials/footer.ejs") %>

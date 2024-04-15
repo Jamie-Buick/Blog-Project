@@ -209,3 +209,26 @@ textarea {
   color: gray  !important;
   text-align: left;
 }
+
+
+.contentPage p{
+  text-align: left;
+}
+
+.contentPage .author {
+  font-weight: bold;
+  color: gray !important;
+  margin: 1.5em 0 ;
+}
+
+
+.contentPage .date {
+  font-weight: bold;
+  color: gray !important;
+}
+
+.contentPageTitle h1 {
+  font-weight: bolder;
+  color: gray !important;
+  margin-bottom: 2rem;
+}

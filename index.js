@@ -58,6 +58,7 @@ app.get("/write", (req, res)=> {
 app.post("/submit", (req, res) => {
   
   const today = new Date();
+  today = date.toDateString();
  
   const post = ({
       name: req.body.name,
@@ -133,6 +134,7 @@ app.get('/blog/:postId', (req, res) => {
         id: post.id,
         title: post.title,
         name: post.name,
+        date: post.date,
         content: post.content
         // Add other properties as needed
       };

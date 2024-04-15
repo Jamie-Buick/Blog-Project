@@ -9,7 +9,7 @@
                     <div class="col p-4 d-flex flex-column position-static">
                         <h1 class=" "><%= posts[i].title %></h1>
                         
-                        <div class="mb-1"><%= posts[i].today %></div>
+                        <div class="mb-1"><%= posts[i].date %></div>
                         <% const contentWords = posts[i].content.split(' ').slice(0, 50).join(' ') + "..."; %>
                         <p class="card-text mb-2"><%= contentWords %></p>
                         <h5 class="mb-0"><%=posts[i].name %></h5>
@@ -25,7 +25,7 @@
                         <div class="col p-4 d-flex flex-column position-static">
                             <h1 class=" "><%= posts[i + 1].title %></h1>
                         
-                            <div class="mb-1"><%= posts[i + 1].today %></div>
+                            <div class="mb-1"><%= posts[i + 1].date %></div>
                             <% const contentWords = posts[i + 1].content.split(' ').slice(0, 50).join(' ') + "..."; %>
                             <p class="card-text mb-2"><%= contentWords %></p>
                             <h5 class="mb-0"><%=posts[i + 1].name %></h5>
