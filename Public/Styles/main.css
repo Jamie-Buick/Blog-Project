@@ -194,16 +194,18 @@ textarea {
 .cards h1{
   color: black  !important;
   text-align: left;
-  margin-bottom: 3rem;
+  
 }
 
 .cards h5{
   color: gray  !important;
   font-size:medium;
+  font-weight: bold;
 }
 
 .cards p{
-  padding-top: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   color: gray  !important;
   text-align: left;
 }

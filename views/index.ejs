@@ -7,11 +7,12 @@
             <div class="col-md-6">
                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
-                        <h1 class="mb-2 "><%= posts[i].title %></h1>
-                        <h5 class="mb-0"><%= "Author: " + posts[i].name %></h5>
+                        <h1 class=" "><%= posts[i].title %></h1>
+                        
                         <div class="mb-1"><%= posts[i].today %></div>
-                        <% const contentWords = posts[i].content.split(' ').slice(0, 100).join(' '); %>
-                        <p class="card-text mb-auto"><%= contentWords %></p>
+                        <% const contentWords = posts[i].content.split(' ').slice(0, 50).join(' ') + "..."; %>
+                        <p class="card-text mb-2"><%= contentWords %></p>
+                        <h5 class="mb-0"><%=posts[i].name %></h5>
                         <a href="/blog/<%= posts[i].id %>" class="icon-link gap-1 icon-link-hover stretched-link">
                             <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
                         </a>
@@ -22,11 +23,12 @@
                 <div class="col-md-6">
                     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
-                            <h1 class=" mb-2"><%= posts[i + 1].title %></h1>
-                            <h5 class="mb-0"><%="Author: " + posts[i + 1].name %></h5>
+                            <h1 class=" "><%= posts[i + 1].title %></h1>
+                        
                             <div class="mb-1"><%= posts[i + 1].today %></div>
-                            <% const contentWords2 = posts[i + 1].content.split(' ').slice(0, 100).join(' '); %>
-                            <p class="card-text mb-auto"><%= contentWords2 %></p>
+                            <% const contentWords = posts[i + 1].content.split(' ').slice(0, 50).join(' ') + "..."; %>
+                            <p class="card-text mb-2"><%= contentWords %></p>
+                            <h5 class="mb-0"><%=posts[i + 1].name %></h5>
                             <a href="/blog/<%= posts[i + 1].id %>" class="icon-link gap-1 icon-link-hover stretched-link">
                                 <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
                             </a>

@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
       return request.query(query);
     })
     .then(result => {
-      console.log('Fetched posts:', result.recordset); // Log the fetched posts
+      //console.log('Fetched posts:', result.recordset); // Log the fetched posts
 
       // Check if any posts were fetched
       const posts = result.recordset || [];
@@ -61,6 +61,7 @@ app.post("/submit", (req, res) => {
  
   const post = ({
       name: req.body.name,
+      code: req.body.code,
       email:  req.body.email,
       title: req.body.title,
       content: req.body.content,
@@ -70,7 +71,7 @@ app.post("/submit", (req, res) => {
   // Here, you can handle the form data as you wish, such as saving it to a database or logging it
   //console.log('Submitted form data:');
   //console.log('Post:', post);
- // console.log('Submitted:', submitted);
+  // console.log('Submitted:', submitted);
   //console.log('today:', today);
 
   // Redirect or render a thank you page
@@ -86,12 +87,13 @@ app.post("/submit", (req, res) => {
 
     // Define the SQL query with parameters
     const query = `
-      INSERT INTO posts (Name, Email, Title, Content, Date)
-      VALUES (@name, @email, @title, @content, @date)
+      INSERT INTO posts (Name, Code, Email, Title, Content, Date)
+      VALUES (@name, @code, @email, @title, @content, @date)
     `;
 
     // Add parameters to the request
     request.input('name', sql.NVarChar, post.name);
+    request.input('code', sql.NVarChar, post.code);
     request.input('email', sql.NVarChar, post.email);
     request.input('title', sql.NVarChar, post.title);
     request.input('content', sql.NVarChar, post.content);
