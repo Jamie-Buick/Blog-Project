@@ -6,6 +6,8 @@ import config from './config.cjs';
 const app = express();
 const port = 3000;
 
+let selectedPost = {};
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -119,8 +121,7 @@ app.post("/submit", (req, res) => {
 
 app.get('/blog/:postId', (req, res) => {
   const postId = req.params.postId;
-  let selectedPost = {};
-
+  
   sql.connect(config)
     .then(pool => {
       const request = pool.request();
@@ -133,11 +134,14 @@ app.get('/blog/:postId', (req, res) => {
       selectedPost = {
         id: post.id,
         title: post.title,
+        code: post.code,
         name: post.name,
         date: post.date,
         content: post.content
         // Add other properties as needed
+        
       };
+      
       res.render('selected.ejs', { selectedPost: selectedPost });
       sql.close();
     })
@@ -147,7 +151,135 @@ app.get('/blog/:postId', (req, res) => {
       res.status(500).send('Error fetching post data');
       sql.close();
     });
+
+
+  app.get("/delete", (req, res)=> {
+    res.render("delete.ejs")
+
+    app.post("/delete-code", (req, res) => {
+      const enteredCode = req.body.code;
+      console.log(enteredCode + selectedPost.code);
+
+      if(enteredCode.trim() == selectedPost.code.trim()){
+      sql.connect(config)
+      .then(pool => {
+        console.log('Connected to SQL Server database');
+    
+        // Create a new request object
+        const request = pool.request();
+    
+        // Define the SQL query with parameters
+        const deleteQuery = `
+          DELETE FROM posts WHERE code = @enteredCode
+        `;
+        
+        // Bind the parameter
+        request.input('enteredCode', sql.NVarChar, enteredCode);
+        
+        // Execute the query
+        return request.query(deleteQuery);
+      })
+      .then(result => {
+        console.log('Post deleted successfully');
+        sql.close();
+        res.render("index.ejs")
+      })
+      .catch(err => {
+        console.error('Error inserting post:', err);
+        sql.close();
+      });
+    }
+    else
+    {
+      console.log("wrong code")
+    } 
+  
+    
+  });
+
+
+
+
+  });
+
+
+
+
+
 });
+
+
+/*  
+app.get("/delete", (req, res)=> {
+  res.render("delete.ejs")
+});
+
+  app.post("/delete-code", (req, res) => {
+    const enteredCode = req.body.code;
+     if(enteredCode == selectedPost.code){
+    sql.connect(config)
+    .then(pool => {
+      console.log('Connected to SQL Server database');
+  
+      // Create a new request object
+      const request = pool.request();
+  
+      // Define the SQL query with parameters
+      const deleteQuery = `
+        DELETE FROM posts WHERE code = @code
+      `;
+  
+      // Execute the query
+      return request.query(deleteQuery,[enteredCode]);
+    })
+    .then(result => {
+      console.log('Post deleted successfully');
+      sql.close();
+    })
+    .catch(err => {
+      console.error('Error inserting post:', err);
+      sql.close();
+    });
+  }
+  else
+  {
+    console.log("wrong code")
+  } 
+
+  
+});*/
+
+
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.get("/edit", (req, res)=> {
+  res.render("edit.ejs")
+});
+
+
 
  
   
