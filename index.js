@@ -170,19 +170,55 @@ app.get('/blog/:postId', (req, res) => {
     
         // Define the SQL query with parameters
         const deleteQuery = `
-          DELETE FROM posts WHERE code = @enteredCode
+          DELETE FROM posts WHERE id = @postId
         `;
         
         // Bind the parameter
-        request.input('enteredCode', sql.NVarChar, enteredCode);
+        request.input('postId', sql.Int, postId);
         
         // Execute the query
         return request.query(deleteQuery);
       })
       .then(result => {
         console.log('Post deleted successfully');
-        sql.close();
-        res.render("index.ejs")
+          // Connect to the database
+          sql.connect(config)
+          .then(pool => {
+            console.log('Connected to SQL Server database');
+
+            // Create a new request object
+            const request = pool.request();
+
+            // Define the SQL query
+            const query = 'SELECT * FROM Posts';
+
+            // Execute the query
+            return request.query(query);
+          })
+          .then(result => {
+            //console.log('Fetched posts:', result.recordset); // Log the fetched posts
+
+            // Check if any posts were fetched
+            const posts = result.recordset || [];
+
+            // Reverse the order of posts to display the newest at the top
+            const reversedPosts = posts.reverse();
+
+            // Render the EJS template with the reversed posts
+            res.render("index.ejs", { posts: reversedPosts });
+
+            // Close the SQL connection after rendering the template
+            sql.close();
+          })
+          .catch(err => {
+            console.error('Error fetching data:', err);
+            // Render the EJS template with an empty array (or handle the error differently)
+            res.render("index.ejs", { posts: [] });
+
+            // Close the SQL connection in case of error
+            sql.close();
+          });
+       
       })
       .catch(err => {
         console.error('Error inserting post:', err);
@@ -198,53 +234,61 @@ app.get('/blog/:postId', (req, res) => {
     
   });
 
+  app.get("/edit", (req, res)=> {
+    res.render("edit-code.ejs")
+  
+    app.post("/edit-code", (req, res) => {
+      const enteredCode = req.body.code;
+      console.log(enteredCode + selectedPost.code);
+  
+      if(enteredCode.trim() == selectedPost.code.trim()){
+      sql.connect(config)
+      .then(pool => {
+        console.log('Connected to SQL Server database');
+    
+        // Create a new request object
+        const request = pool.request();
+    
+        // Define the SQL query with parameters
+        const editQuery = `
+          SELECT * FROM posts WHERE code = @enteredCode
+        `;
+        
+        // Bind the parameter
+        request.input('enteredCode', sql.NVarChar, enteredCode);
+        
+        // Execute the query
+        return request.query(editQuery);
+      })
+      .then(result => {
+        sql.close();
+        res.render("edit.ejs")
+      })
+      .catch(err => {
+        console.error('Error inserting post:', err);
+        sql.close();
+      });
+    }
+    else
+    {
+      console.log("wrong code")
+    } 
+    
+  });
+    
+  });
+  
+
+
+
+
+
+
+
 });
 
 
 
-app.get("/edit", (req, res)=> {
-  res.render("edit.ejs")
-
-  app.post("/delete-code", (req, res) => {
-    const enteredCode = req.body.code;
-    console.log(enteredCode + selectedPost.code);
-
-    if(enteredCode.trim() == selectedPost.code.trim()){
-    sql.connect(config)
-    .then(pool => {
-      console.log('Connected to SQL Server database');
-  
-      // Create a new request object
-      const request = pool.request();
-  
-      // Define the SQL query with parameters
-      const editQuery = `
-        SELECT * FROM posts WHERE code = @enteredCode
-      `;
-      
-      // Bind the parameter
-      request.input('enteredCode', sql.NVarChar, enteredCode);
-      
-      // Execute the query
-      return request.query(editQuery);
-    })
-    .then(result => {
-      sql.close();
-      res.render("edit.ejs")
-    })
-    .catch(err => {
-      console.error('Error inserting post:', err);
-      sql.close();
-    });
-  }
-  else
-  {
-    console.log("wrong code")
-  } 
-  
-});
-  
-});
 
 
 
