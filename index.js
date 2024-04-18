@@ -59,8 +59,8 @@ app.get("/write", (req, res)=> {
 
 app.post("/submit", (req, res) => {
   
-  const today = new Date();
-  today = date.toDateString();
+  let today = new Date();
+  today = today.toDateString();
  
   const post = ({
       name: req.body.name,
@@ -100,7 +100,7 @@ app.post("/submit", (req, res) => {
     request.input('email', sql.NVarChar, post.email);
     request.input('title', sql.NVarChar, post.title);
     request.input('content', sql.NVarChar, post.content);
-    request.input('date', sql.DateTime, post.date);
+    request.input('date', sql.NVarChar, post.date);
 
     // Execute the query
     return request.query(query);
@@ -193,30 +193,23 @@ app.get('/blog/:postId', (req, res) => {
     {
       console.log("wrong code")
     } 
-  
+    
+  });
     
   });
 
-
-
-
-  });
-
-
-
-
-
 });
 
 
-/*  
-app.get("/delete", (req, res)=> {
-  res.render("delete.ejs")
-});
+
+app.get("/edit", (req, res)=> {
+  res.render("edit.ejs")
 
   app.post("/delete-code", (req, res) => {
     const enteredCode = req.body.code;
-     if(enteredCode == selectedPost.code){
+    console.log(enteredCode + selectedPost.code);
+
+    if(enteredCode.trim() == selectedPost.code.trim()){
     sql.connect(config)
     .then(pool => {
       console.log('Connected to SQL Server database');
@@ -225,16 +218,19 @@ app.get("/delete", (req, res)=> {
       const request = pool.request();
   
       // Define the SQL query with parameters
-      const deleteQuery = `
-        DELETE FROM posts WHERE code = @code
+      const editQuery = `
+        SELECT * FROM posts WHERE code = @enteredCode
       `;
-  
+      
+      // Bind the parameter
+      request.input('enteredCode', sql.NVarChar, enteredCode);
+      
       // Execute the query
-      return request.query(deleteQuery,[enteredCode]);
+      return request.query(editQuery);
     })
     .then(result => {
-      console.log('Post deleted successfully');
       sql.close();
+      res.render("edit.ejs")
     })
     .catch(err => {
       console.error('Error inserting post:', err);
@@ -245,39 +241,14 @@ app.get("/delete", (req, res)=> {
   {
     console.log("wrong code")
   } 
-
   
-});*/
-
-
-
-    
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-app.get("/edit", (req, res)=> {
-  res.render("edit.ejs")
 });
+  
+});
+
+
+
+
 
 
 

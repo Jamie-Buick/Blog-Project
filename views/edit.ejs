@@ -1,5 +1,13 @@
 <%- include("partials/header.ejs") %>
 
+<h1>Please Enter The Post Access Code to Edit the Post</h1>
+
+<div class="delete container">
+    <form action="/edit-code" method="POST" style="text-align:center" >
+        <input name="code" type="text" class="feedback-input" placeholder="Code" />
+        <input type="submit" value="SUBMIT" />
+    </form>
+</div>
 
 
 
