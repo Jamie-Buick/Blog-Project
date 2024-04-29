@@ -108,6 +108,45 @@ app.post("/submit", (req, res) => {
   .then(result => {
     console.log('Post inserted successfully');
     sql.close();
+    app.get("/", (req, res) => {
+      // Connect to the database
+      sql.connect(config)
+        .then(pool => {
+          console.log('Connected to SQL Server database');
+    
+          // Create a new request object
+          const request = pool.request();
+    
+          // Define the SQL query
+          const query = 'SELECT * FROM Posts';
+    
+          // Execute the query
+          return request.query(query);
+        })
+        .then(result => {
+          //console.log('Fetched posts:', result.recordset); // Log the fetched posts
+    
+          // Check if any posts were fetched
+          const posts = result.recordset || [];
+    
+          // Reverse the order of posts to display the newest at the top
+          const reversedPosts = posts.reverse();
+    
+          // Render the EJS template with the reversed posts
+          res.render("index.ejs", { posts: reversedPosts });
+    
+          // Close the SQL connection after rendering the template
+          sql.close();
+        })
+        .catch(err => {
+          console.error('Error fetching data:', err);
+          // Render the EJS template with an empty array (or handle the error differently)
+          res.render("index.ejs", { posts: [] });
+    
+          // Close the SQL connection in case of error
+          sql.close();
+        });
+    });
   })
   .catch(err => {
     console.error('Error inserting post:', err);
